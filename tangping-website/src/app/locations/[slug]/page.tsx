@@ -79,8 +79,8 @@ export default async function LocationPage({ params }: { params: { slug: string 
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">风光图集</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {location.gallery.map((img, index) => (
-                    <div key={index} className="relative w-full h-64">
-                        <Image src={img} alt={`${location.name} gallery image ${index + 1}`} width={400} height={300} style={{ objectFit: "cover" }} className="rounded-lg w-full h-full" />
+                    <div key={index} className="rounded-lg overflow-hidden">
+                        <Image src={img} alt={`${location.name} gallery image ${index + 1}`} width={400} height={300} style={{ objectFit: "cover" }} className="w-full h-full" />
                     </div>
                 ))}
             </div>
