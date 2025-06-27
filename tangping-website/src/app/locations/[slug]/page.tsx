@@ -12,6 +12,8 @@ export async function generateStaticParams() {
   }));
 }
 
+export const dynamic = 'force-static';
+
 export default async function LocationPage({ params }: MyPageProps) {
   const { slug } = await params;
   const location = locations.find((loc) => loc.slug === slug);
