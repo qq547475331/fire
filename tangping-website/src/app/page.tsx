@@ -19,7 +19,7 @@ export default function Home() {
           <Link
             key={location.id}
             href={`/locations/${location.slug}`}
-            className="group block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+            className="group block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out overflow-hidden transform hover:scale-105 no-underline"
           >
             <div className="relative">
               <Image src={location.image} alt={location.name} width={400} height={200} className="w-full h-48 object-cover" />

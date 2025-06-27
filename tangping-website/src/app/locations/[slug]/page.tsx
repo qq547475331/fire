@@ -2,19 +2,13 @@ import Image from 'next/image';
 import { locations } from '@/data/locations';
 import { notFound } from 'next/navigation';
 
-interface MyPageProps {
-  params: Promise<{ slug: string }>;
-}
-
 export async function generateStaticParams() {
   return locations.map((location) => ({
     slug: location.slug,
   }));
 }
 
-export const dynamic = 'force-static';
-
-export default async function LocationPage({ params }: MyPageProps) {
+export default async function LocationPage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
   const location = locations.find((loc) => loc.slug === slug);
 
@@ -38,7 +32,7 @@ export default async function LocationPage({ params }: MyPageProps) {
   return (
     <div className="bg-gray-50 min-h-screen">
       <header className="relative z-10 min-h-[16rem] md:min-h-[20rem] lg:min-h-[24rem]">
-        <Image src={location.image} alt={location.name} fill style={{ objectFit: "cover" }} />
+        <Image src={location.image} alt={location.name} fill sizes="100vw" style={{ objectFit: "cover" }} />
         <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center">
           <div className="text-center text-white w-full px-4">
             <h1 className="text-4xl md:text-6xl font-bold break-words">{location.name}</h1>
@@ -85,7 +79,9 @@ export default async function LocationPage({ params }: MyPageProps) {
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">风光图集</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {location.gallery.map((img, index) => (
-                    <Image key={index} src={img} alt={`${location.name} gallery image ${index + 1}`} fill sizes="100vw" style={{ objectFit: "cover" }} className="rounded-lg w-full h-full" />
+                    <div key={index} className="relative w-full h-64">
+                        <Image src={img} alt={`${location.name} gallery image ${index + 1}`} width={400} height={300} style={{ objectFit: "cover" }} className="rounded-lg w-full h-full" />
+                    </div>
                 ))}
             </div>
         </div>
